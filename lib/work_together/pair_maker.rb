@@ -19,7 +19,7 @@ class PairMaker
     two_from_batch(sorted)
     two_groups_of_two = []
     self.batches.each_slice(2) {|slice| two_groups_of_two << slice}
-    mindful_batch_of_two
+    mindful_batch_of_two(two_groups_of_two)
   end
 
   def make_pairs_progress(students)
@@ -81,8 +81,8 @@ class PairMaker
         first = group[0]
         second = group[1]
         if second 
-          last_two_first = group.values_at(-1, -2)
-          first_two_second = group.values_at(0, 1)
+          last_two_first = first.values_at(-1, -2)
+          first_two_second = second.values_at(0, 1)
           2.times do 
             first.delete_at(-1)
             second.delete_at(0)
