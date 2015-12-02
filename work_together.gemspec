@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["sophie.debenedetto@gmail.com"]
 
   spec.summary       = %q{Automatically generate pairs and tables for you class from the command line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.homepage      = "https://github.com/SophieDeBenedetto/work-together"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
