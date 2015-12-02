@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+require 'pry'
+require 'csv'
+require_relative '../lib/work_together.rb'
+
+puts "HI!!"
+
+binding.pry
+
+puts "BYE!!"
