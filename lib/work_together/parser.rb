@@ -4,9 +4,13 @@ class Parser
 
   def self.parse_and_make_students(file)
     CSV.foreach(file) do |row|
-      name = "#{row[0]} #{row[1]}" unless row[0] == "first_name"
-      progress = row[5]
-      Student.new(name, progress)
+      make_student_attributes(row) unless row[0] == "first_name" || row[0].nil?
     end
+  end
+
+  def self.make_student_attributes(row)
+    name = "#{row[0]} #{row[1]}"
+    progress = row[5]
+    Student.new(name, progress)
   end
 end

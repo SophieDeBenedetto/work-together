@@ -99,16 +99,20 @@ class PairMaker
 
     def mindful_batch_of_two(two_groups_of_two)
       two_groups_of_two.each do |group|
-        first = group[0]
-        second = group[1]
-        first_last = first[-1]
-        second_first = second[0]
-        first.delete_at(-1)
-        second.delete_at(0)
-        first << second_first
-        second << first_last
-        Table.new(first)
-        Table.new(second) 
+        if group.length >= 2
+          first = group[0]
+          second = group[1]
+          first_last = first[-1]
+          second_first = second[0]
+          first.delete_at(-1)
+          second.delete_at(0)
+          first << second_first
+          second << first_last
+          Table.new(first)
+          Table.new(second)
+        else
+          Table.new(group[0])
+        end
       end
     end
 
