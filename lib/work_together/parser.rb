@@ -6,7 +6,6 @@ class Parser
     CSV.foreach(file) do |row|
       make_student_attributes(row) unless row[0] == "first_name" || row[0].nil?
     end
-    binding.pry
   end
 
   def self.make_student_attributes(row)
