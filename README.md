@@ -60,4 +60,4 @@ wt.make_batch
   ...]
 ```
 
-* Currently, Students have first and last names, active track (i.e. batch), completion (number of labs and readings they have finished), email and Github username. 
+* Currently, Students have first and last names, active track (i.e. batch), completion (number of labs and readings they have finished, aliased via a `#progress` method), email and Github username. 
