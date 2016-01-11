@@ -48,9 +48,9 @@ class WorkTogether
       Table.all.each_with_index do |table, i|
           puts "Group #{i + 1}:".colorize(:blue)
           table.students.each do |student|
-            puts student.name.colorize(:green)
+            puts student.name.colorize(:light_blue)
           end
-          puts "-------------------".colorize(:pink)
+          puts "-------------------".colorize(:blue)
         end
     end
 
