@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
   # spec.bindir        = "exec"
   # spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.executables << 'work-together'
-  spec.files         = ["lib/work_together/client.yml", "lib/work_together/learn_proxy.rb", "lib/work_together/pair_maker.rb", "lib/work_together/parser.rb", "lib/work_together/student.rb", "lib/work_together/table.rb", "lib/work_together/version.rb", "lib/work_together.rb"]
+  spec.files         = ["lib/work_together/client.yml", "lib/work_together/learn_proxy.rb", "lib/work_together/pair_maker.rb", "lib/work_together/parser.rb", "lib/work_together/table.rb", "lib/work_together/version.rb", "lib/work_together.rb"]
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 1.10"
