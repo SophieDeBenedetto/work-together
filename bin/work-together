@@ -1,12 +1,12 @@
 #!/usr/bin/env ruby
-require 'pry'
+
 require 'csv'
 require_relative '../lib/work_together.rb'
 
 if ARGV.length >= 3
-  WorkTogether.new(ARGV[2]).generate_togetherness(ARGV)
+  WorkTogether::Generator.new(ARGV[2]).generate_togetherness(ARGV)
 elsif ARGV.include?("--help")
-  WorkTogether.new.help
+  WorkTogether::Generator.new.help
 else
   puts "please use work-together --help for a list of options"
 end
