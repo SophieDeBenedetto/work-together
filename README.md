@@ -18,7 +18,7 @@ Gem sends request to Learn API endpoint of a given batch, parses payload into cs
 
 `work-together pairs --mindful batch-number`
 
-`work-together talbes --mindful batch-number`
+`work-together tables --mindful batch-number`
 
 `work-together pairs --progress batch-number`
 
@@ -26,31 +26,31 @@ Gem sends request to Learn API endpoint of a given batch, parses payload into cs
 
 ## Using the gem in another project
 
-Public-facing class is `WorkTogether` class. 
+Public-facing code is `WorkTogether` module. 
 
-* Initialize with an argument of the batch id number `WorkTogether.new(batch-id)`. 
+* Initialize with an argument of the batch id number `WorkTogether::Generator.new(batch-id)`. 
 * Generate groups from CSV with the `#generate_togetherness` method. This method takes in two arguments:
 
 ```ruby
- wt = WorkTogether.new(168)
+ wt = WorkTogether::Generator.new(168)
  wt.generate_togetherness(["pairs", "--random"], "quiet")`
 ```
 
 * First argument of `#generate_togetherness` is an array that contains the following options: first element-`"pairs", "random", "mindful"`, second element -`"--random", "--mindful", "--progress"`. 
 * Third argument is optional, defaults to `nil`. Use `"quiet"` if you *don't* wan't to `puts` out resulting groups to the terminal. 
-* To generate a batch, i.e. a collection of Student objects, without then generating groups, use the `#make_batch` method:
+* To generate a batch, i.e. a collection of `WorkTogether::Student` objects, without then generating groups, use the `#make_batch` method:
 
 ```ruby
-wt = WorkTogether.new(168)
+wt = WorkTogether::Generator.new(168)
 wt.make_batch
-=> [#<Student:0x007fbd6b4341c8
+=> [#<WorkTogether::Student:0x007fbd6b4341c8
   @active_track="Web Development Immersive 2016",
   @completion="201",
   @email="asialindsay@gmail.com",
   @first_name="Asia",
   @github_username="asialindsay",
   @last_name="Lindsay">,
- #<Student:0x007fbd6b42fd58
+ #<WorkTogether::Student:0x007fbd6b42fd58
   @active_track="Web Development Immersive 2016",
   @completion="201",
   @email="cmcguigan33@gmail.com",
