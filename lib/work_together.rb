@@ -3,7 +3,6 @@ require_relative './work_together/parser.rb'
 require_relative './work_together/table.rb'
 require_relative './work_together/pair_maker.rb'
 require_relative './work_together/learn_proxy.rb'
-require 'pry'
 require 'colorize'
 
 module WorkTogether
