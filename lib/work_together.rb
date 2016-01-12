@@ -33,12 +33,13 @@ module WorkTogether
       get_and_parse_csv
     end
 
-    def make_groups(options, quiet)
+    def make_groups(options, quiet, students=nil)
+      students ||= Student.all
       flag = options[1][2..-1]
       if options.include?("pairs")
-        pair_maker.public_send("make_pairs_#{flag}", Student.all)
+        pair_maker.public_send("make_pairs_#{flag}", students)
       elsif options.include?("tables")
-        pair_maker.public_send("make_tables_#{flag}", Student.all)
+        pair_maker.public_send("make_tables_#{flag}", students)
       elsif options.include?("--help")
         help
       else
