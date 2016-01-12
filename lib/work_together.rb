@@ -40,6 +40,8 @@ module WorkTogether
         pair_maker.public_send("make_pairs_#{flag}", students)
       elsif options.include?("tables")
         pair_maker.public_send("make_tables_#{flag}", students)
+      elsif options.include?("groups")
+        pair_maker.public_send("make_groups", flag, students)
       elsif options.include?("--help")
         help
       else
@@ -94,6 +96,14 @@ module WorkTogether
      
     def self.all
       Table.all
+    end
+
+    def self.all_students
+      self.all.map do |group|
+        group.students.map do |student|
+          student
+        end
+      end.flatten
     end
 
     def self.display_groups

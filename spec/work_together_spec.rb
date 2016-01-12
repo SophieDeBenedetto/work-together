@@ -83,6 +83,24 @@ describe WorkTogether do
             expect(WorkTogether::Group.all.first.students.first.class).to eq(WorkTogether::Student)
           end
         end
+
+        it "generates n number of groups given an argument of 'groups --n'/ 2 groups" do 
+          
+          VCR.use_cassette('cassettes/student_roster') do
+            wt = WorkTogether::Generator.new(168)
+            wt.generate_togetherness(["groups", "--2"], "quiet")
+            expect(WorkTogether::Group.all.length).to eq(2)
+            expect(WorkTogether::Group.all_students.length).to eq(33)
+          end
+        end
+        it "generates n number of groups given an argument of 'groups --n'/ 3 groups" do
+          VCR.use_cassette('cassettes/student_roster') do
+            wt = WorkTogether::Generator.new(168)
+            wt.generate_togetherness(["groups", "--3"], "quiet")
+            expect(WorkTogether::Group.all.length).to eq(3)
+            expect(WorkTogether::Group.all_students.length).to eq(33)
+          end
+        end
       end
 
       context "without quiet option" do 

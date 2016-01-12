@@ -48,6 +48,20 @@ class PairMaker
     mindful_batch_of_four(two_groups_of_four)
   end
 
+  def make_groups(num_of_groups, students)
+    num_of_groups = students.length/num_of_groups.to_i
+    # binding.pry
+    students.each_slice(num_of_groups).each do |slice|
+      # binding.pry
+      if slice.length == 1
+        Table.all.last.students << slice.first
+      else
+        Table.new(slice)
+      end
+    end
+    # binding.pry
+  end
+
   private
 
     def randomize_students(students)
