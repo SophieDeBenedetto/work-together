@@ -11,7 +11,7 @@ module WorkTogether
 
     attr_accessor :batch_id, :client, :pair_maker, :keys
 
-    def initialize(batch_id)
+    def initialize(batch_id=nil)
       @batch_id = batch_id
       @pair_maker = PairMaker.new
     end
@@ -28,6 +28,11 @@ module WorkTogether
       Student.generate_from_data(student_data)
     end
 
+    def make_batch_data
+      configure_client
+      get_and_parse_csv
+    end
+
     def make_groups(options, quiet)
       flag = options[1][2..-1]
       if options.include?("pairs")
@@ -39,20 +44,10 @@ module WorkTogether
       else
         puts "Please enter a valid command. Type work-together --help for more."
       end
-      display_tables if !quiet && Table.all.length > 0
+      Group.display_groups if !quiet && Group.all.length > 0
     end
 
     private 
-
-      def display_tables
-        Table.all.each_with_index do |table, i|
-            puts "Group #{i + 1}:".colorize(:blue)
-            table.students.each do |student|
-              puts student.name.colorize(:light_blue)
-            end
-            puts "-------------------".colorize(:blue)
-          end
-      end
 
       def help
         puts "Available commands:"
@@ -94,6 +89,23 @@ module WorkTogether
       end
   end
 
+  class Group
+     
+    def self.all
+      Table.all
+    end
+
+    def self.display_groups
+      Table.all.each_with_index do |table, i|
+        puts "Group #{i + 1}:".colorize(:blue)
+        table.students.each do |student|
+          puts student.name.colorize(:light_blue)
+        end
+        puts "-------------------".colorize(:blue)
+      end
+    end
+  end
+
   class Student
     @@all = []
 
@@ -107,6 +119,12 @@ module WorkTogether
       @@all 
     end
 
+    def self.build_attributes(headers)
+      headers.each do |header| 
+        attr_accessor header.to_sym
+      end
+    end
+
     def name
       "#{first_name} #{last_name}"
     end
@@ -115,7 +133,13 @@ module WorkTogether
       self.completion
     end
 
+    def self.attributes_from_data(data)
+      attributes = data.first.to_hash.keys
+      self.build_attributes(attributes)
+    end
+
     def self.generate_from_data(data)
+      attributes_from_data(data)
       data.each do |student_hash|
         student_hash.delete_if {|attribute, value| !Student.instance_methods.include?(attribute.to_sym)}
         self.new.tap do |student|

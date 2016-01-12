@@ -16,7 +16,7 @@ describe WorkTogether do
       File.open(File.expand_path("../work_together") + '/lib/work_together/client.yml', 'w') {|f| f.write '' } 
     end 
 
-    describe "#get_roster" do 
+    describe "#make_batch" do 
 
       it 'writes user credentials to lib/work_together/client.yml file' do 
         VCR.use_cassette('cassettes/student_roster') do
@@ -58,9 +58,9 @@ describe WorkTogether do
           VCR.use_cassette('cassettes/student_roster') do
             wt = WorkTogether::Generator.new(168)
             wt.generate_togetherness(["tables", "--random"], "quiet")
-            expect(Table.all.length).to eq(9)
-            expect(Table.all.first.students.length).to eq(4)
-            expect(Table.all.first.students.first.class).to eq(WorkTogether::Student)
+            expect(WorkTogether::Group.all.length).to eq(9)
+            expect(WorkTogether::Group.all.first.students.length).to eq(4)
+            expect(WorkTogether::Group.all.first.students.first.class).to eq(WorkTogether::Student)
           end
         end
 
@@ -68,9 +68,9 @@ describe WorkTogether do
           VCR.use_cassette('cassettes/student_roster') do
             wt = WorkTogether::Generator.new(168)
             wt.generate_togetherness(["pairs", "--random"], "quiet")
-            expect(Table.all.length).to eq(17)
-            expect(Table.all.first.students.length).to eq(2)
-            expect(Table.all.first.students.first.class).to eq(WorkTogether::Student)
+            expect(WorkTogether::Group.all.length).to eq(17)
+            expect(WorkTogether::Group.all.first.students.length).to eq(2)
+            expect(WorkTogether::Group.all.first.students.first.class).to eq(WorkTogether::Student)
           end
         end
       end
@@ -80,9 +80,9 @@ describe WorkTogether do
           VCR.use_cassette('cassettes/student_roster') do
             wt = WorkTogether::Generator.new(168)
             expect{wt.generate_togetherness(["tables", "--random"])}.to output.to_stdout
-            expect(Table.all.length).to eq(9)
-            expect(Table.all.first.students.length).to eq(4)
-            expect(Table.all.first.students.first.class).to eq(WorkTogether::Student)
+            expect(WorkTogether::Group.all.length).to eq(9)
+            expect(WorkTogether::Group.all.first.students.length).to eq(4)
+            expect(WorkTogether::Group.all.first.students.first.class).to eq(WorkTogether::Student)
           end
         end
 
@@ -90,9 +90,9 @@ describe WorkTogether do
           VCR.use_cassette('cassettes/student_roster') do
             wt = WorkTogether::Generator.new(168)
             expect{wt.generate_togetherness(["pairs", "--random"])}.to output.to_stdout
-            expect(Table.all.length).to eq(17)
-            expect(Table.all.first.students.length).to eq(2)
-            expect(Table.all.first.students.first.class).to eq(WorkTogether::Student)
+            expect(WorkTogether::Group.all.length).to eq(17)
+            expect(WorkTogether::Group.all.first.students.length).to eq(2)
+            expect(WorkTogether::Group.all.first.students.first.class).to eq(WorkTogether::Student)
           end
         end
       end
