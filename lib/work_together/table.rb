@@ -13,4 +13,10 @@ class Table
   def self.all
     @@all
   end
+
+  def self.all_students
+    self.all.map do |table|
+      table.students
+    end
+  end
 end
