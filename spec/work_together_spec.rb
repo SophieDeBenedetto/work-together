@@ -53,6 +53,16 @@ describe WorkTogether do
     end
 
     describe "#generate_togetherness" do
+      before(:each) do 
+        File.open(File.expand_path("../work_together") + '/lib/work_together/client.yml', 'w') {|f| f.write '' }
+        keys = {"GITHUB_USERNAME" => "SophieDeBenedetto", "GITHUB_PASSWORD" => "fakepassword"}
+        File.open(File.expand_path("../work_together") + '/lib/work_together/client.yml', 'w') {|f| f.write keys.to_yaml }  
+      end
+
+      after(:each) do 
+        File.open(File.expand_path("../work_together") + '/lib/work_together/client.yml', 'w') {|f| f.write '' }
+      end
+
       context "with quiet option" do  
         it "generates the correct number of groups of 4 when given an argument of 'tables', does not puts anyting out" do 
           VCR.use_cassette('cassettes/student_roster') do
